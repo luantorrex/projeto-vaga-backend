@@ -1,44 +1,37 @@
-# ACMEVita
+# Instruções API ACMEVita
 
-Projeto de modelagem de dados e criação de uma API utilizando Python e Flask.
+## Sobre a API
 
-**Este projeto é parte do processo de seleção de desenvolvedor backend da [Telavita](https://telavita.com.br).**
+A API ACMEVita funciona como gerenciadora dos departamentos, colaboradores e dependentes.
 
-## Sobre o projeto
+A partir dela é possível cadastrar e consultar informações sobre os colaboradores e departamentos da companhia.
 
-A ACMEVita está expandindo seus negócios e precisa de um sistema para gerenciar seus departamentos, colaboradores e dependentes.
+### Configurações
 
-O seu único desenvolvedor backend está de ferias, você foi recrutado para finalizar este projeto, boa sorte!
+Para executar a aplicação, é recomendado executá-la em uma máquina Linux e criar um ambiente virtual, onde serão instaladas as dependências da aplicação. Para isso, é necessário executar os seguintes comandos no diretório raíz da aplicação:
+* pip install virtualenv
+* virtualenv venv
+* source venv/bin/activate
 
-### Requisitos
+Criada e iniciada máquina virtual, precisamos instalar as dependências da aplicação. Para isso, iremos executar o seguinte comando:
+* pip install -r requirements.txt
 
-#### Como um Usuário da API eu gostaria de consultar todos os departamentos para visualizar a organização da ACMEVita.
+Para iniciar a aplicação, basta executá-la por meio do comando:
+* flask run
 
-* Cada departamento deve possuir um *nome do departamento*.
-* A API deve responder com uma listagem de departamentos no formato JSON informando o *nome do departamento* de cada departamento.
+Iniciada a aplicação, podemos fazer uso dela por meio dos seguintes endpoints:
 
-#### Como um Usuário da API eu gostaria de consultar todos os colaboradores de um departamento para visualizar a organização da ACMEVita.
+##### Listar departamentos:
+* http://127.0.0.1:5000/departments/list_departments (Método GET)
 
-* Cada colaborador deve possuir um *nome completo*.
-* Cada colaborador deve pertencer a *um* departamento.
-* Cada colaborador pode possuir *nenhum, um ou mais* dependententes.
-* A API deve responder com uma listagem de colaboradores do departamento no formato JSON informando o *nome completo* de cada colaborador e a respectiva flag booleana `have_dependents` caso o colaborador possua *um ou mais dependentes*.
+##### Listar colaboradores de um departamento:
+* http://127.0.0.1:5000/departments/list_collaborators/<<department_id>> (Método GET)
+Exemplo de Path: http://127.0.0.1:5000/departments/list_collaborators/3
 
-### Diferenciais
+##### Cadastrar departamentos:
+* http://127.0.0.1:5000/departments/register (Método POST)
+Exemplo de Body: {"name": "SSC"}
 
-* Testes unitários
-* Referência (Swagger ou similar)
-* Documentação e instruções de configuração
-* Separação das camadas de responsabilidade (modelagem de dados, serialização, lógica, etc)
-
-### Instruções
-
-1. Faça um _fork_ ou download deste projeto.
-2. Trabalhe localmente no seu projeto, faça até o ponto que conseguir.
-3. Você está livre para organizar a estrutura do projeto como preferir.
-4. Você deve utilizar o Flask para criar os endpoints da API.
-4. Você pode utilizar a ORM de sua preferência para modelagem de dados.
-5. Suba o seu projeto para o GitLab, GitHub ou similar.
-6. Nos envie o link para o seu projeto, **mesmo que não esteja finalizado!**
-
-**Qualquer dúvida, entre em contato com [Rafael](mailto:rc@telavita.com.br)!**
+##### Cadastrar colaboradores:
+* http://127.0.0.1:5000/collaborators/register (Método POST)
+Exemplo de Body: {"full_name": "Jorge Alcantara","department_id": 4,"dependents": 0}

@@ -11,15 +11,6 @@ def index():
         }))
 
 
-@app.route('/departments/list_all', methods=['GET'])
-def list_all_departments():
-    departments_dict = departments.list_all()
-
-    return make_response(jsonify({
-        "departments": departments_dict
-    }))
-
-
 @app.route('/departments/register', methods=['POST'])
 def register_department():
     department_name = departments.register(eval(request.data))
@@ -29,7 +20,16 @@ def register_department():
     }))
 
 
-@app.route('/collaborators/list_per_department/<int:id>', methods=['GET'])
+@app.route('/departments/list_departments', methods=['GET'])
+def list_all_departments():
+    departments_dict = departments.list_all()
+
+    return make_response(jsonify({
+        "departments": departments_dict
+    }))
+
+
+@app.route('/departments/list_collaborators/<int:id>', methods=['GET'])
 def list_all_collaboratos(id):
     collaborators_dict = collaborators.list_per_department(id)
 

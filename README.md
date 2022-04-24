@@ -19,6 +19,8 @@ Criada e iniciada máquina virtual, precisamos instalar as dependências da apli
 Para iniciar a aplicação, basta executá-la por meio do comando:
 * flask run
 
+### Instruções
+
 Iniciada a aplicação, podemos fazer uso dela por meio dos seguintes endpoints:
 
 ##### Listar departamentos:
@@ -26,12 +28,15 @@ Iniciada a aplicação, podemos fazer uso dela por meio dos seguintes endpoints:
 
 ##### Listar colaboradores de um departamento:
 * http://127.0.0.1:5000/departments/list_collaborators/<<department_id>> (Método GET)
+
 Exemplo de Path: http://127.0.0.1:5000/departments/list_collaborators/3
 
 ##### Cadastrar departamentos:
 * http://127.0.0.1:5000/departments/register (Método POST)
+
 Exemplo de Body: {"name": "SSC"}
 
 ##### Cadastrar colaboradores:
 * http://127.0.0.1:5000/collaborators/register (Método POST)
+
 Exemplo de Body: {"full_name": "Jorge Alcantara","department_id": 4,"dependents": 0}

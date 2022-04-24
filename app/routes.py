@@ -29,9 +29,9 @@ def register_department():
     }))
 
 
-@app.route('/collaborators/list_all', methods=['GET'])
-def list_all_collaboratos():
-    collaborators_dict = collaborators.list_all()
+@app.route('/collaborators/list_per_department/<int:id>', methods=['GET'])
+def list_all_collaboratos(id):
+    collaborators_dict = collaborators.list_per_department(id)
 
     return make_response(jsonify({
         "collaborators": collaborators_dict

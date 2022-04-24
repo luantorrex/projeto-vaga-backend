@@ -22,3 +22,9 @@ def register(data):
     db.session.commit()
 
     return department_name
+
+
+def check_if_department_exists(department_id):
+    department_exists = Department.query.filter_by(id=department_id).first()
+
+    return True if department_exists else False

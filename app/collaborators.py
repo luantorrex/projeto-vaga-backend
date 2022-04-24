@@ -1,9 +1,13 @@
 from app import db
 from app.models import Collaborator, Department
+from app.departments import check_if_department_exists
 
 
-def list_all():
-    collaborators_table = Collaborator.query.all()
+def list_per_department(department_id):
+    if not check_if_department_exists(department_id):
+        return int(department_id)
+
+    collaborators_table = Collaborator.query.filter_by(department_id=department_id)
     collaborators_dict = {}
 
     for collaborator in collaborators_table:
@@ -12,7 +16,6 @@ def list_all():
         
         collaborators_dict[collaborator.id] = {
             'full_name': collaborator.full_name,
-            'department': collaborator.department_id,
             'have_dependents': have_dependents
         }
 
@@ -24,9 +27,7 @@ def register(data):
     dependents = data['dependents']
     department_id = data['department_id']
 
-    department_exists = Department.query.filter_by(id=department_id).first()
-    
-    if not department_exists:
+    if not check_if_department_exists(department_id):
         return int(department_id)
 
     collaborator = Collaborator(full_name=full_name, dependents=dependents, department_id=department_id)

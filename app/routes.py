@@ -33,6 +33,15 @@ def list_all_departments():
 def list_all_collaboratos(id):
     collaborators_dict = collaborators.list_per_department(id)
 
+    # Se não existir departamento com o id que foi recebido, a função register retorna esse id.
+    if isinstance(collaborators_dict, int):
+        department_id = collaborators_dict
+        
+        return make_response(jsonify({
+            "msg": "The department with id %r does not exist." % department_id 
+        }), 400)
+
+    # Se existir departamento, é retornado um dicionário contendo informações dos funcionários do setor.
     return make_response(jsonify({
         "collaborators": collaborators_dict
     }))
@@ -42,7 +51,7 @@ def list_all_collaboratos(id):
 def register_collaborator():
     collaborator = collaborators.register(eval(request.data))
     
-    # Se não existir departamento com o id que foi recebido, a função register retorna esse id.  
+    # Se não existir departamento com o id que foi recebido, a função register retorna esse id.
     if isinstance(collaborator, int):
         department_id = collaborator
 

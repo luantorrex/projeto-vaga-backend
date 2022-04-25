@@ -1,0 +1,125 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "A API ACMEVita funciona como gerenciadora dos departamentos, colaboradores e dependentes.",
+        "version": "1.0.0",
+        "title": "ACMEVITA API",
+        "contact": {
+            "email": "luan.torres@sample.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "tags": [
+        {
+        "name": "ACMEVITA API",
+        "description": "A API ACMEVita funciona como gerenciadora dos departamentos, colaboradores e dependentes."
+        }
+    ],
+    "paths": {
+        "/departments/list_collaborators/{id}": {
+          "get": {
+            "tags": [
+              "Collaborators Request"
+            ],
+            "parameters": [
+                {
+                  "in": "path",
+                  "name": "id",
+                  "required": true,
+                  "description": "Department id",
+                  "schema": {
+                    "$ref": "#/components/schemas/id"
+                  }
+                }
+              ],
+            "summary": "Request collaborators per department",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/components/schemas/collaborators"
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "schema": {
+                    "$ref": "#/components/schemas/collaborators"
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "schema": {
+                    "$ref": "#/components/schemas/collaborators"
+                }
+              }
+            }
+          }
+        },
+        "/departments/list_departments": {
+            "get": {
+                "tags": [
+                "Departments Request"
+                ],
+                "summary": "Request all departments",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                        "$ref": "#/components/schemas/departments"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/components/schemas/departments"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "id": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    }
+                }
+            },
+            "collaborators": {
+                "type": "object",
+                "properties": {
+                    "full_name": {
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "department_id": {
+                        "type": "string",
+                        "format": "number"
+                    },
+                    "dependents": {
+                        "type": "string",
+                        "format": "number"
+                    }
+                }
+            },
+            "departments": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "collaborators": {
+                        "type": "string",
+                        "format": "number"
+                    }
+                }
+            }
+        }
+    }
+}

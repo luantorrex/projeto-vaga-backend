@@ -40,3 +40,8 @@ Exemplo de Body: {"name": "SSC"}
 * http://127.0.0.1:5000/collaborators/register (Método POST)
 
 Exemplo de Body: {"full_name": "Jorge Alcantara","department_id": 4,"dependents": 0}
+
+### Swagger
+
+Para fazer requisições à aplicação via Swagger, basta acessar a seguinte URL, nela é possível consultar as listas de colaboradores e departamentos:
+* http://127.0.0.1:5000/swagger
